@@ -1,0 +1,25 @@
+{% extends "member/base.html" %}
+{% load static %}
+{% block content %}
+<div class="col-md-10">
+        <div class="content-section">
+          <h3>New Registrations</h3>
+            {% for user in users %}
+            <article class="media">
+              {% if user.Profile.image %}
+              <img class="rounded-circle article-img" src="{{ user.Profile.image.url }}" alt="">
+              {% else %}
+              <img class="rounded-circle article-img" src="{% static 'img/default.jpg' %}" alt="">
+              {% endif %}
+              <div class="row">
+              <div class="media-body">
+                  <h5>{{ user.username }}</h5>
+                  <p>{{ user.date_joined }}</p>
+              </div>
+              <a href="{% url 'approve-user' user.pk %}">Accept</a>
+            </div>
+            </article>
+            {% endfor %}
+          </p>
+        </div>
+{% endblock content %}    
